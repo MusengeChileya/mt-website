@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swipe Image Gallery</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #image-container {
+            display: flex;
+            width: 300%;
+            transition: transform 0.5s;
+        }
+        img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container">
+        <img src="image1.jpg" alt="Image 1">
+        <img src="image2.jpg" alt="Image 2">
+        <img src="image3.jpg" alt="Image 3">
+        <img src="image3.jpg" alt="Image 3">
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const images = document.querySelectorAll("img");
+        const container = document.getElementById("image-container");
+
+        function updateContainer() {
+            container.style.transform = `translateX(-${currentIndex * 100}vw)`;
+        }
+
+        function showNextImage() {
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+                updateContainer();
+            }
+        }
+
+        function showPreviousImage() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateContainer();
+            }
+        }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                showPreviousImage();
+            } else if (event.key === "ArrowRight") {
+                showNextImage();
+            }
+        });
+    </script>
+</body>
+</html>
